@@ -63,7 +63,7 @@ public class NettyHttpClient { // with Dumpable
     	}
     };
     
-	QuickTimerEngine qte = new QuickTimerEngine(onTimeoutFunction,timerInterval);
+	QuickTimerEngine qte;
 
 	ConcurrentHashMap dataMap = new ConcurrentHashMap<Integer,TimeoutInfo>(); // key is sequence
 	ConcurrentHashMap connMap = new ConcurrentHashMap<Integer,TimeoutInfo>(); // key is channel.getId
@@ -85,6 +85,7 @@ public class NettyHttpClient { // with Dumpable
     	this.connectTimeout = connectTimeout;
     	this.timerInterval = timerInterval;
     	this.maxContentLength = maxContentLength;
+        this.qte = new QuickTimerEngine(onTimeoutFunction, timerInterval);
 
     	pipelineFactory = new NettyPipelineFactory();
 
